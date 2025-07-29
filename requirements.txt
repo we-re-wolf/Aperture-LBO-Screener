@@ -1,0 +1,13 @@
+# Core Libraries
+pandas
+numpy
+scipy
+
+# Data Sourcing
+yfinance
+sec-api
+requests
+
+# Frontend & Visualization
+streamlit
+plotly
