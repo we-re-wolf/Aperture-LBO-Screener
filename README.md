@@ -1,114 +1,133 @@
-Aperture: The Data-Driven LBO Screening Platform
-Aperture is a sophisticated, Python-based financial analysis platform designed to automate the core private equity workflow of proprietary deal sourcing. It systematically screens a universe of public companies to identify promising Leveraged Buyout (LBO) candidates, runs an automated LBO model on each, and presents the findings in a professional, interactive dashboard.
+# 📊 Aperture: The Data-Driven LBO Screening Platform
 
-This project moves beyond the execution-focused mindset of an analyst to the idea-generation and investment-thesis-driven mindset of a private equity associate, demonstrating the ability to think critically like a principal investor.
+**Aperture** is a sophisticated, Python-based financial analysis platform designed to automate the core private equity workflow of proprietary deal sourcing. It systematically screens a universe of public companies to identify promising Leveraged Buyout (LBO) candidates, runs an automated LBO model on each, and presents the findings in a professional, interactive dashboard.
 
+This project moves beyond the execution-focused mindset of an analyst to the idea-generation and investment-thesis-driven mindset of a private equity associate—demonstrating the ability to think critically like a principal investor.
 
-🚀 Core Features
-Aperture is a complete, end-to-end toolkit that transforms raw market data into actionable investment insights.
+---
 
-Interactive Screening Control Panel: A dynamic sidebar allows users to adjust all key LBO screening criteria in real-time (e.g., max valuation multiple, min growth rate, max leverage). The candidate list updates instantly, enabling powerful scenario analysis.
+## 🚀 Core Features
 
-High-Performance Data Engine: A multi-threaded data pipeline efficiently sources and processes market data (yfinance) and multi-year financial statements (from SEC 10-K filings via sec-api) for a large universe of companies.
+Aperture is a complete, end-to-end toolkit that transforms raw market data into actionable investment insights:
 
-Robust Financial Metrics Engine: A heuristic-based calculator intelligently parses financial statements, handling non-standard line items to accurately compute key metrics like Revenue CAGR, EBITDA Margin stability, and Capital Intensity.
+- **🎛 Interactive Screening Control Panel**  
+  A dynamic sidebar allows users to adjust key LBO screening criteria in real time (e.g., max valuation multiple, min growth rate, max leverage). The candidate list updates instantly for powerful scenario analysis.
 
-Automated LBO Modeling: For every company that passes the screen, the platform automatically runs a simplified LBO model to calculate the two most important private equity return metrics: Internal Rate of Return (IRR) and Multiple on Invested Capital (MOIC).
+- **⚡ High-Performance Data Engine**  
+  A multi-threaded pipeline efficiently sources and processes market data from `yfinance` and multi-year financial statements from SEC 10-K filings (via `sec-api`) for a large universe of companies.
 
-Professional Investment Memo Dashboard: The Streamlit frontend presents a ranked shortlist of the top LBO candidates. Selecting a candidate reveals a detailed "Tear Sheet" with:
+- **📐 Robust Financial Metrics Engine**  
+  A heuristic-based calculator parses financial statements, handling non-standard line items to accurately compute metrics like Revenue CAGR, EBITDA Margin stability, and Capital Intensity.
 
-Key return metrics and transaction assumptions.
+- **🤖 Automated LBO Modeling**  
+  For every company that passes the screen, a simplified LBO model calculates two critical return metrics:
+  - Internal Rate of Return (IRR)
+  - Multiple on Invested Capital (MOIC)
 
-Visualizations of the LBO structure (Sources & Uses) and value creation.
+- **📄 Professional Investment Memo Dashboard**  
+  The Streamlit frontend presents:
+  - A ranked shortlist of top LBO candidates  
+  - A detailed "Tear Sheet" for each candidate, including:
+    - Key return metrics and transaction assumptions
+    - LBO structure visualizations (Sources & Uses, Value Creation)
+    - Screening rationale
+    - Full IRR & MOIC sensitivity analysis
+    - Historical financial statements in tabbed views
 
-A summary of why the company passed the screening criteria.
+---
 
-A full sensitivity analysis showing how IRR and MOIC change with different entry/exit multiples.
+## 🛠️ Tech Stack & Architecture
 
-Tabbed views of the company's complete historical financial statements.
+- **Language**: Python 3.10+
+- **Frontend**: [Streamlit](https://streamlit.io)
+- **Data Analysis**: Pandas, NumPy
+- **Data Sourcing**:
+  - [`yfinance`](https://github.com/ranaroussi/yfinance) for market data
+  - [`sec-api`](https://sec-api.io) for SEC filing data
+- **Visualization**: Plotly Express
 
-🛠️ Tech Stack & Architecture
-Aperture is built with a modular architecture, ensuring that each component of the analysis pipeline is independent and robust.
+### 📁 Project Structure
 
-Language: Python 3.10+
+```
+├── /src/
+│   ├── /connectors/      # API connection modules
+│   ├── /screening/       # Screener logic and metrics engine
+│   ├── /modeling/        # LBO modeling logic
+├── /data/
+│   ├── /universe/        # CSV file with list of tickers
+├── app.py                # Main Streamlit application
+├── requirements.txt      # Project dependencies
+├── README.md             # You’re reading it!
+```
 
-Frontend: Streamlit
+---
 
-Data Analysis: Pandas, NumPy
+## ⚙️ Local Setup and Installation
 
-Data Sourcing:
+Follow the steps below to set up and run Aperture locally.
 
-yfinance: For real-time market data.
+### 1. Prerequisites
 
-sec-api: For sourcing SEC filings and parsing XBRL financial data.
+- Python 3.10 or higher  
+- A Git client
 
-Visualization: Plotly Express
+### 2. Clone the Repository
 
-Project Structure:
-
-/Aperture/
-|-- /src/
-|   |-- /connectors/     # Modules for connecting to external APIs
-|   |-- /screening/      # Metrics Calculator and Screener engines
-|   |-- /modeling/       # The automated LBO model logic
-|-- /data/
-|   |-- /universe/       # CSV file with the list of tickers to screen
-|-- app.py               # The main Streamlit application
-|-- requirements.txt     # Project dependencies
-|-- README.md            # This file
-
-⚙️ Local Setup and Installation
-Follow these steps to set up and run the Aperture application on your local machine.
-
-1. Prerequisites
-Python 3.10 or higher
-
-A git client
-
-2. Clone the Repository
-git clone [https://github.com/your-username/Aperture.git](https://github.com/your-username/Aperture.git)
+```
+git clone https://github.com/we-re-wolf/Aperture.git
 cd Aperture
+```
 
-3. Set Up a Virtual Environment
-It is highly recommended to use a virtual environment to manage project dependencies.
-
-# Create the virtual environment
+### 3. Set Up a Virtual Environment
+```
+# Create virtual environment
 python -m venv venv
 
 # Activate it
-# On macOS/Linux:
+# macOS/Linux:
 source venv/bin/activate
-# On Windows:
+# Windows:
 .\venv\Scripts\activate
+```
 
-4. Install Dependencies
-Install all the required Python libraries using the requirements.txt file.
-
+### 4. Install Dependencies
+```
 pip install -r requirements.txt
+```
 
-5. Configure API Keys
-Aperture requires a free API key from sec-api.io to source financial statements.
+### 5. Configure API Keys
 
-Open the configuration file: src/config.py
+Aperture uses a free API key from sec-api.io to fetch financial statements.
+	•	Open the file: src/config.py
+	•	Paste your SEC API key into the SEC_API_KEY variable.
+```
+SEC_API_KEY = "your_api_key_here"
+```
 
-SEC API Key:
-
-Go to sec-api.io and register for a free API key.
-
-Paste your key into the SEC_API_KEY variable.
-
-6. Run the Application
-Once the setup is complete, you can launch the Streamlit web application.
-
+### 6. Run the Application
+```
 streamlit run app.py
+```
+Your default browser will open the app automatically.
 
-Your web browser will automatically open a new tab with the running application.
+### 🚀 How to Use
+	1.	Launch the application using the above command.
+	2.	Click the “▶️ Start / Refresh Data Pipeline” button to fetch and process data (may take a few minutes).
+	3.	Use the Sidebar Control Panel to adjust screening filters. The candidate list updates live.
+	4.	Select a company from the “Investment Memo Tear Sheet” to view its full LBO analysis.
 
-🚀 How to Use
-Launch the application.
+### 💼 License & Contribution
 
-Click the "▶️ Start / Refresh Data Pipeline" button. The app will fetch and process data for all companies in the universe (this may take a few minutes).
+This is an educational/development tool and not intended for financial advice or live trading.
 
-Use the Control Panel in the sidebar to adjust the screening criteria. The shortlist of candidates will update instantly.
+Feel free to fork, improve, or contribute via pull requests. For questions, open an issue or reach out via GitHub Discussions.
 
-Select a company from the "Investment Memo Tear Sheet" dropdown to view its detailed LBO analysis.
+### 📬 Contact
+
+Created by Aritra Mondal
+📧 [Email](mailto:aritramondal.work@gmail.com)
+🔗 [LinkedIn](https://linkedin.com/in/aritramondal-in)
+
+```
+Let me know if you'd like me to tailor the contact info, add badges, or generate the `requirements.txt` file based on your current codebase.
+```
